@@ -192,6 +192,28 @@ regctl image inspect $REGISTRY/product1/alpine
 regctl image export $REGISTRY/product1/alpine /dev/null
 ```
 
+Try pulling an image **customer** does not have access to:
+
+```shell
+# Using skopeo
+skopeo --insecure-policy --override-os linux --override-arch amd64 inspect --tls-verify=false docker://$REGISTRY/alpine
+skopeo --insecure-policy copy --src-tls-verify=false -a docker://$REGISTRY/alpine oci-archive:///dev/null
+
+# Using regctl
+regctl image inspect $REGISTRY/alpine
+regctl image export $REGISTRY/alpine /dev/null
+```
+
+Try pushing an image as **customer**:
+
+```shell
+# Using skopeo
+skopeo --insecure-policy copy --dest-tls-verify=false -a oci-archive://$PWD/var/alpine.tar.gz docker://$REGISTRY/customer/alpine
+
+# Using regctl
+regctl image import $REGISTRY/customer/alpine $PWD/var/alpine.tar.gz
+```
+
 Logout as **customer** from the registry:
 
 ```shell

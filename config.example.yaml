@@ -16,7 +16,7 @@ passwordAuthenticator:
         enabled: true
         passwordHash: $2a$12$vox7h99HV.gzbZGeBj69jeJVgkkP2nHTndG9USjp..00.WtIqvSpa # password is "password"
         attributes:
-          roles: [user]
+          roles: [customer]
           entitlements: [product1]
 
 # passwordAuthenticator:

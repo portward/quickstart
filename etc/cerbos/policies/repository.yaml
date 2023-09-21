@@ -7,7 +7,8 @@ resourcePolicy:
     - actions: ['pull']
       effect: EFFECT_ALLOW
       roles:
-        - '*'
+        - admin
+        - user
       condition:
         match:
           expr: R.id.indexOf('/') == -1
@@ -22,7 +23,7 @@ resourcePolicy:
     - actions: ['push']
       effect: EFFECT_ALLOW
       roles:
-        - '*'
+        - admin
       condition:
         match:
           all:
@@ -34,16 +35,17 @@ resourcePolicy:
     - actions: ['pull', 'push']
       effect: EFFECT_ALLOW
       roles:
-        - '*'
+        - admin
+        - user
       condition:
         match:
           expr: R.id.startsWith("%s/".format([P.id]))
 
-    # Allow pulling from entitled namespaces
+    # Allow pulling from namespaces matching entitlements
     - actions: ['pull']
       effect: EFFECT_ALLOW
       roles:
-        - '*'
+        - customer
       condition:
         match:
           all:
