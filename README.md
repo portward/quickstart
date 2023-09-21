@@ -123,6 +123,58 @@ regctl image export $REGISTRY/alpine /dev/null
 
 Try pulling an image **user** does not have access to:
 
+```shell
+# Using skopeo
+skopeo --insecure-policy --override-os linux --override-arch amd64 inspect --tls-verify=false docker://$REGISTRY/product1/alpine
+skopeo --insecure-policy copy --src-tls-verify=false -a docker://$REGISTRY/product1/alpine oci-archive:///dev/null
+
+# Using regctl
+regctl image inspect $REGISTRY/product1/alpine
+regctl image export $REGISTRY/product1/alpine /dev/null
+```
+
+Push an image to the registry:
+
+```shell
+# Using skopeo
+skopeo --insecure-policy copy --dest-tls-verify=false -a oci-archive://$PWD/var/alpine.tar.gz docker://$REGISTRY/user/alpine
+
+# Using regctl
+regctl image import $REGISTRY/user/alpine $PWD/var/alpine.tar.gz
+```
+
+Try pushing an image that **user** does not have access to:
+
+```shell
+# Using skopeo
+skopeo --insecure-policy copy --dest-tls-verify=false -a oci-archive://$PWD/var/alpine.tar.gz docker://$REGISTRY/alpine
+
+# Using regctl
+regctl image import $REGISTRY/alpine $PWD/var/alpine.tar.gz
+```
+
+Logout as **user** from the registry:
+
+```shell
+# Using skopeo
+skopeo logout $REGISTRY
+
+# Using regctl
+regctl registry logout $REGISTRY
+```
+
+Log in to the registry as **customer**:
+
+```shell
+# Using skopeo
+skopeo login --tls-verify=false -u customer -p password $REGISTRY
+
+# Using regctl
+regctl registry set --tls=disabled $REGISTRY
+regctl registry login -u customer -p password $REGISTRY
+```
+
+Inspect and pull images in the registry:
 
 ```shell
 # Using skopeo
@@ -134,7 +186,7 @@ regctl image inspect $REGISTRY/product1/alpine
 regctl image export $REGISTRY/product1/alpine /dev/null
 ```
 
-Logout as **user** from the registry:
+Logout as **customer** from the registry:
 
 ```shell
 # Using skopeo
