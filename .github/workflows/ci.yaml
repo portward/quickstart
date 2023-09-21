@@ -30,6 +30,9 @@ jobs:
       - name: Download Alpine image
         run: nix develop --impure .#ci -c just download-alpine
 
+      - name: Prepare configuration
+        run: cp config.example.yaml config.yaml
+
       - name: Launch Docker Compose
         run: docker compose -f docker-compose.yaml up -d
 
