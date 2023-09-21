@@ -65,6 +65,8 @@ Decide which registry you want to use:
 - [Distribution](https://github.com/distribution/distribution): `export REGISTRY=127.0.0.1:5000`
 - [Zot](https://github.com/project-zot/zot): `export REGISTRY=127.0.0.1:5001`
 
+### Admin use case
+
 Log in to the registry as **admin**:
 
 ```shell
@@ -97,6 +99,8 @@ skopeo logout $REGISTRY
 # Using regctl
 regctl registry logout $REGISTRY
 ```
+
+### User use case
 
 Log in to the registry as **user**:
 
@@ -162,6 +166,8 @@ skopeo logout $REGISTRY
 # Using regctl
 regctl registry logout $REGISTRY
 ```
+
+### Customer use case
 
 Log in to the registry as **customer**:
 
