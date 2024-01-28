@@ -11,7 +11,7 @@ services:
       - ./etc/portward/private_key.pem:/private_key.pem
 
   docker:
-    image: registry:2.8.2
+    image: registry:2.8.3
     ports:
       - 127.0.0.1:5000:5000
     volumes:
@@ -19,8 +19,7 @@ services:
       - ./etc/docker:/etc/docker/registry
 
   zot:
-    # image: ghcr.io/project-zot/zot-linux-arm64:v2.0.0-rc6
-    image: ghcr.io/sagikazarmark/zot:auth-fix
+    image: ghcr.io/project-zot/zot-linux-amd64:v2.0.1
     ports:
       - 127.0.0.1:5001:5001
     volumes:
@@ -28,7 +27,7 @@ services:
       - ./etc/zot:/etc/zot
 
   cerbos:
-    image: ghcr.io/cerbos/cerbos:0.30.0
+    image: ghcr.io/cerbos/cerbos:0.33.0
     ports:
       - 127.0.0.1:3592:3592
       - 127.0.0.1:3593:3593
