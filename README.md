@@ -29,7 +29,7 @@ Using `regctl`:
 
 ```shell
 mkdir -p var/
-regctl image export docker.io/library/alpine:latest $PWD/varalpine.tar.gz
+regctl image export docker.io/library/alpine:latest $PWD/var/alpine.tar.gz
 ```
 
 **For an optimal developer experience, it is recommended to install [Nix](https://nixos.org/download.html) and [direnv](https://direnv.net/docs/installation.html).**
